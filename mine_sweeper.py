@@ -122,8 +122,8 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--width", type=int, required=True, help="defines the width of the grid")
-    parser.add_argument("--height", type=int, required=True, dest="height", help="defines the height of the grid")
+    parser.add_argument("--width", type=int, default=14, help="defines the width of the grid")
+    parser.add_argument("--height", type=int, default=10, help="defines the height of the grid")
     parser.add_argument("--scale", type=float, default=1.0, help="defines the scale of the grid")
 
     args = parser.parse_args()
