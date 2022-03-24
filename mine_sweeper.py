@@ -100,6 +100,7 @@ def dig(event):
 
 
 def mark(event):
+    global flagged_count
     # we use event.widget to get button id clicked
     # then configure it to set image as flag
     # if it is already a flag we can remove the flag
@@ -108,8 +109,12 @@ def mark(event):
         if event.widget.cget("image") in [str(flag), str(tile)]:
             if event.widget.cget("image") == str(flag):
                 event.widget.config(image=tile)
+                flagged_count -= 1
             else:
                 event.widget.config(image=flag)
+                flagged_count += 1
+
+            root.title("Minesweeper - {}/{} mines flagged".format(flagged_count, mine_count))
 
 
 def resize_image(img):
@@ -153,6 +158,7 @@ if __name__ == "__main__":
 
     planted_mines = False
     mine_count = int((board_x * board_y) / 6.4)
+    flagged_count = 0
     dug_tiles = []
     offset = 0
     game_over = False
@@ -166,5 +172,5 @@ if __name__ == "__main__":
             var.bind("<Button-3>", mark)
             buttons[y][x] = var
 
-    root.title("Minesweeper")
+    root.title("Minesweeper - 0/{} mines flagged".format(mine_count))
     root.mainloop()
